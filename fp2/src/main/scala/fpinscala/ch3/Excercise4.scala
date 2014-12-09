@@ -47,6 +47,15 @@ object Excercise4 {
     val listWithNone = scala.collection.immutable.List(Some("Ala") , None, Some("ma") )
     println("Result  Option.sequence(list) = " + Option.sequence_1(list))
     println("Result  Option.sequence(listWithNone) = " + Option.sequence_1(listWithNone))
+ 
+    println("----excersise 4.5:")
+    val listWithParseableNumbers = scala.collection.immutable.List("1","2","3") 
+    val listWithParseableNumbersAndText = scala.collection.immutable.List("1","text")
+    def Try[A](a: => A):Option[A] = 
+      	try Some(a) catch {case e: Exception=>None}
+    println("Result  Option.traverse_1(listWithParseableNumbers)(i => Try(i.toInt) ) = " + Option.traverse_1(listWithParseableNumbers)(i => Try(i.toInt) ))
+    println("Result  Option.traverse_1(listWithParseableNumbersAndText)(i => Try(i.toInt) ) = " + Option.traverse_1(listWithParseableNumbersAndText)(i => Try(i.toInt) ))
+    
 
 
   }
