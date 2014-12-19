@@ -1,4 +1,4 @@
-package fpinscala.ch3
+package fpinscala.ch4
 
 import fpinscala.ch4.Option
 import fpinscala.ch4.Some
@@ -57,6 +57,14 @@ object Excercise4 {
     println("Result  Option.traverse_1(listWithParseableNumbersAndText)(i => Try(i.toInt) ) = " + Option.traverse_1(listWithParseableNumbersAndText)(i => Try(i.toInt) ))
     
 
+    println("----excersise 4.7:")
+    val listRight = scala.collection.immutable.List(Right("Ala") , Right("ma"), Right("kota") ) 
+    val listWithLeft = scala.collection.immutable.List(Right("Ala") , Left("nie ma"), Right("ma") )
+  
+    println("Result Either.sequence(listRight) = " + Either.sequence(listRight))
+    println("Result Either.sequence(listWithLeft) = " + Either.sequence(listWithLeft))
 
+    println("----excersise 4.8:")
+  
   }
 }
