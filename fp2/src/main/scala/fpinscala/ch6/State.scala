@@ -196,15 +196,24 @@ object Candy {
       case (Turn, Machine(true, _, _)) => s
       case (Coin, Machine(true, candy, coin)) => Machine(false, candy, coin + 1)
       case (Turn, Machine(false, candy, coin)) => Machine(true, candy - 1, coin)
-    }));
+    }));    
     for {
       _ <- sequence(stateListMapped)
       s <- get
+      //or : 
+      // s <- {val a1:State[Machine,Machine]=get ; a1}
     } yield (s.coins, s.candies)
+    
+    // flatMap[B](f: A => State[S, B]): State[S, B]
+    //  def map[B](f: A => B): State[S, B] =
+    //  get[S]: State[S, S] = State(s => (s, s))
+
     //    or in flatMap+map:
-    //    sequence(stateListMapped) flatMap ( 
-    //    		_ => get map (
-    //    						s => (s.coins,s.candies)
+    //    sequence(stateListMapped)			// === State[Machine, List[Unit]]
+    //	  flatMap ( 						// === flatMap[(Int, Int)](f: Machine => State[Machine, (Int, Int)]): State[Machine, (Int, Int)]   //B===(Int, Int); S===Machine
+    //    		_ => get map (									// _ === Machine   ;  ' get map (...) ' === State[Machine, (Int, Int)]
+    //																			// get ==  State[Machine, Machine]  ;  ' map (...) '=== State[Machine, (int,int)]
+    //    						s => (s.coins,s.candies)					//   ===  f: A => B    where A===Machine B===(Int, Int)
     //    					 ) 
     //        ) 
   }
